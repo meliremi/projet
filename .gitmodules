@@ -1,0 +1,3 @@
+[submodule "projet_avion"]
+	path = projet_avion
+	url = https://github.com/meliremi/projet.git

@@ -3,362 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prédiction de Satisfaction Client - Compagnie Aérienne</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>AirSatisfy - Prédiction de Satisfaction Client</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #3b82f6;
-            --primary-dark: #1d4ed8;
-            --secondary: #4b5563;
-            --success: #10b981;
-            --info: #06b6d4;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --light: #f3f4f6;
-            --dark: #111827;
-            --header-bg: #0f172a;
-            --form-bg: #ffffff;
-            --accent: #8b5cf6;
-            --accent-light: #c4b5fd;
-        }
+            --primary: #00ABE4;
+            --primary-light: #96C2DB;;
+            --primary-dark: #303a65;      /* Bleu nuit pour header/footer et titres */
+            --secondary: #10b981;         /* Vert pour succès ou éléments secondaires */
+            --dark: #333333;              /* Gris foncé pour le texte principal */
+            --light: #E5EDF1;  
+            --danger: #E7473C;            /* Rouge vif pour alertes et erreurs */
+    --warning: #f59e0b;           /* Orange pour avertissements */
+    --gray: #6b7280;              /* Gris pour éléments neutres */
+    --card-bg: #ffffff;           /* Fond des cartes/blocs */
+    --body-bg: #F9FAFB;           /* Fond général du site */
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --border-radius: 0.5rem;
+}
+        
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
         
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
         body {
-            background: #f8fafc;
-            color: #334155;
+            background-color: var(--body-bg);
+            color: var(--dark);
             line-height: 1.6;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23e2e8f0' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
         
         .container {
-            width: 100%;
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
+            padding: 0 1.5rem;
         }
         
         header {
-            position: relative;
-            background: var(--header-bg);
+            background: var(--primary-dark);
             color: white;
-            padding: 3rem 0 6rem 0;
-            border-radius: 0 0 30% 30% / 50px;
-            overflow: hidden;
-            margin-bottom: 8rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
+            padding: 1rem 0;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.6) 0%, rgba(139, 92, 246, 0.8) 100%);
-            z-index: 1;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
         }
         
-        header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            z-index: 0;
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        header h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, #ffffff, #c4b5fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .header-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            transform: rotate(-10deg);
-            color: #c4b5fd;
-            text-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: rotate(-10deg) translateY(0px); }
-            50% { transform: rotate(-5deg) translateY(-15px); }
-            100% { transform: rotate(-10deg) translateY(0px); }
-        }
-        
-        .form-container {
-            background-color: var(--form-bg);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-            margin-bottom: 2rem;
-            position: relative;
-            margin-top: -6rem;
-            z-index: 10;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .form-container::before {
-            content: '';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 24px;
-            border-radius: 12px;
-            background: var(--accent);
-            box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
-        }
-
-        .section-title {
-            color: var(--primary-dark);
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin-bottom: 1.8rem;
-            padding-bottom: 0.7rem;
-            border-bottom: 2px solid #e2e8f0;
-            position: relative;
+        .navbar {
             display: flex;
+            justify-content: space-between;
             align-items: center;
         }
         
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -2px;
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
         }
         
-        .section-title i {
-            margin-right: 12px;
-            color: var(--accent);
+        .logo i {
+            margin-right: 10px;
             font-size: 1.8rem;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
         
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.8rem;
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 4rem 0;
+            background-image: linear-gradient(
+                to right, 
+                #96C2DB, #E5EDF1
+            ), url('/api/placeholder/1400/500');
+            background-size: cover;
+            background-position: center;
+            color: white;
             margin-bottom: 2rem;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            overflow: hidden;
+        }
+        .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://via.placeholder.com/1400x500') center/cover;
+    opacity: 0.3;
+    z-index: 1;
+}
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .form-container {
+            flex: 2;
+            min-width: 0;
+        }
+        
+        .result-container {
+            flex: 1;
+            min-width: 300px;
+            position: sticky;
+            top: 80px;
+            align-self: flex-start;
+            height: fit-content;
+        }
+        
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        h2 {
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 1.5rem;
+            position: relative;
+        }
+        
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .form-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .form-section h3 i {
+            margin-right: 10px;
+            color: var(--primary);
+            font-size: 1.1em;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .form-row:last-child {
+            margin-bottom: 0;
         }
         
         .form-group {
-            margin-bottom: 0.5rem;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group:hover {
-            transform: translateY(-2px);
+            flex: 1;
+            min-width: 180px;
         }
         
         label {
             display: block;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
             font-weight: 500;
-            color: var(--secondary);
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            color: var(--dark);
+            font-size: 0.9rem;
         }
         
         input, select {
             width: 100%;
-            padding: 0.9rem 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
+            background-color: #fff;
             color: var(--dark);
-            background-color: #f8fafc;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         
         input:focus, select:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+            border-color: var(--primary);
             outline: none;
-            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(75, 111, 255, 0.15);
         }
         
-        input:hover, select:hover {
-            border-color: #cbd5e1;
-        }
-        
-        select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-4-4h8l-4 4z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            padding-right: 2.5rem;
-        }
-        
-        .button-group {
+        .rating-group {
             display: flex;
-            justify-content: center;
-            gap: 1.2rem;
-            margin-top: 3rem;
+            flex-direction: column;
+        }
+        
+        .rating-options {
+            display: flex;
+            justify-content: space-between;
+            background-color: #f9fafb;
+            border-radius: 0.375rem;
+            padding: 0.25rem;
+            margin-top: 0.5rem;
+        }
+        
+        .rating-option {
+            flex: 1;
+            text-align: center;
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .rating-option:hover {
+            background-color: rgba(75, 111, 255, 0.1);
+        }
+        
+        .rating-option.selected {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .form-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
             flex-wrap: wrap;
         }
         
-        button {
-            padding: 1rem 2.2rem;
+        .btn {
+            padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 12px;
+            border-radius: 0.375rem;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         }
         
-        button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            z-index: -1;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.5s ease;
-        }
-        
-        button:hover::before {
-            transform: scaleX(1);
-            transform-origin: left;
+        .btn i {
+            margin-right: 0.5rem;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            background-color: var(--primary);
             color: white;
-            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
         }
         
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(59, 130, 246, 0.4);
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
         }
         
         .btn-secondary {
-            background: #f1f5f9;
-            color: var(--secondary);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e2e8f0;
+            background-color: #f3f4f6;
+            color: var(--dark);
         }
         
         .btn-secondary:hover {
-            background: #e2e8f0;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+            background-color: #e5e7eb;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         
-        button i {
-            margin-right: 8px;
-            font-size: 1.1rem;
+        .btn-secondary:active {
+            transform: translateY(0);
         }
         
-        #result-container {
-            display: none;
-            background: white;
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            margin-top: 3rem;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+        .btn-danger {
+            background-color: #f3f4f6;
+            color: var(--danger);
+        }
+        
+        .btn-danger:hover {
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+        
+        .btn-success {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #0ea16b;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .btn-random {
+            background-color: #b9b2c9;
+            color: white;
+        }
+        
+        .btn-random:hover {
+            background-color: #7c3aed;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .result-box {
+            background-color: #f9fafb;
+            border-radius: 0.375rem;
+            padding: 2rem;
             text-align: center;
-            animation: fadeIn 0.8s ease;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
             transition: all 0.3s ease;
-            transform: perspective(1000px);
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px) perspective(1000px) rotateX(-10deg); }
-            to { opacity: 1; transform: translateY(0) perspective(1000px) rotateX(0); }
-        }
-        
-        .result-positive {
-            border-top: 5px solid var(--success);
-            background: linear-gradient(to bottom, rgba(16, 185, 129, 0.05), white);
-        }
-        
-        .result-negative {
-            border-top: 5px solid var(--danger);
-            background: linear-gradient(to bottom, rgba(239, 68, 68, 0.05), white);
+        .result-box.hidden {
+            display: none;
         }
         
         .result-icon {
             font-size: 4rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            position: relative;
+            margin-bottom: 1rem;
+            transition: transform 0.5s ease;
         }
         
-        .result-icon::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100px;
-            height: 100px;
-            background: #f1f5f9;
-            border-radius: 50%;
-            z-index: -1;
-        }
-        
-        .result-positive .result-icon {
-            color: var(--success);
-            animation: pulse 2s infinite;
-        }
-        
-        .result-negative .result-icon {
-            color: var(--danger);
-            animation: shake 4s infinite;
+        .result-icon.pulse {
+            animation: pulse 1s infinite;
         }
         
         @keyframes pulse {
@@ -367,742 +386,752 @@
             100% { transform: scale(1); }
         }
         
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            2%, 6%, 10% { transform: translateX(-5px); }
-            4%, 8%, 12% { transform: translateX(5px); }
-            14% { transform: translateX(0); }
+        .result-text {
+            font-size: 1.25rem;
+            font-weight: 600;
         }
         
-        .result-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--dark);
+        .result-details {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--gray);
         }
         
-        .result-message {
-            font-size: 1.2rem;
+        .satisfied {
             color: var(--secondary);
-            margin-bottom: 2rem;
-            line-height: 1.6;
         }
         
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            color: #64748b;
-            font-size: 0.95rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, #cbd5e1, transparent);
+        .dissatisfied {
+            color: var(--danger);
         }
         
         .loader {
             display: none;
-            text-align: center;
-            margin: 2rem 0;
-        }
-        
-        .loader i {
-            font-size: 3rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: spin 1.2s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .rating {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: flex-end;
-        }
-
-        .rating input {
-            display: none;
-        }
-
-        .rating label {
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            margin: 0 3px;
-            background-color: #e2e8f0;
-            border-radius: 50%;
-            transition: all 0.3s;
             position: relative;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
         }
         
-        .rating label::before {
-            content: '';
+        .loader div {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 12px;
-            height: 12px;
+            border: 4px solid var(--primary);
+            opacity: 1;
             border-radius: 50%;
-            background: white;
-            opacity: 0;
-            transition: all 0.3s;
-        }
-
-        .rating input:checked ~ label {
-            background-color: var(--accent);
-            transform: scale(1.2);
+            animation: ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
         }
         
-        .rating input:checked ~ label::before {
-            opacity: 1;
-        }
-
-        .rating label:hover,
-        .rating label:hover ~ label {
-            background-color: var(--accent-light);
-            transform: scale(1.1);
+        .loader div:nth-child(2) {
+            animation-delay: -0.5s;
         }
         
-        /* Ajouts pour une interface encore plus impressionnante */
-        .flying-element {
-            position: absolute;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.4;
+        @keyframes ripple {
+            0% {
+                top: 28px;
+                left: 28px;
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                top: -1px;
+                left: -1px;
+                width: 58px;
+                height: 58px;
+                opacity: 0;
+            }
         }
         
-        .element-1 {
-            top: 20%;
-            left: 5%;
-            font-size: 2rem;
-            color: var(--accent-light);
-            animation: floatSlow 15s ease-in-out infinite;
+        .info-box {
+            background-color: rgba(75, 111, 255, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.375rem;
+            font-size: 0.9rem;
         }
         
-        .element-2 {
-            top: 70%;
-            right: 8%;
-            font-size: 1.5rem;
-            color: var(--primary);
-            animation: floatSlow 18s ease-in-out infinite 1s;
+        .info-box p {
+            margin-bottom: 0.5rem;
         }
         
-        .element-3 {
-            bottom: 15%;
-            left: 15%;
-            font-size: 1.8rem;
-            color: var(--accent);
-            animation: floatSlow 12s ease-in-out infinite 2s;
+        .info-box p:last-child {
+            margin-bottom: 0;
         }
         
-        @keyframes floatSlow {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(15px, -15px) rotate(5deg); }
-            66% { transform: translate(-15px, 15px) rotate(-5deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
+        .info-box.info-box-result {
+            margin-top: 1.5rem;
         }
         
-        .form-group::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 90%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
-            opacity: 0;
-            transition: all 0.5s ease;
-        }
-        
-        .form-group:focus-within::after {
-            transform: translateX(-50%) scaleX(1);
-            opacity: 1;
-        }
-        
-        .section-wave {
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 50px;
-            z-index: 3;
-        }
-        
-        /* Card style pour les groupes d'évaluation */
-        .rating-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            padding: 20px;
-            transition: all 0.3s ease;
-            height: 100%;
-            border: 1px solid #f1f5f9;
-        }
-        
-        .rating-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-            border-color: var(--accent-light);
-        }
-        
-        .rating-card select {
-            background-color: white;
-        }
-        
-        /* Progress bar au sommet du formulaire */
-        .progress-container {
-            width: 100%;
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 4px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            width: 0;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            transition: width 0.5s ease;
-            border-radius: 4px;
-        }
-        
-        /* Tooltip personnalisé */
-        .tooltip {
-            position: relative;
+        .badge {
             display: inline-block;
-            margin-left: 8px;
-            color: var(--secondary);
-            cursor: pointer;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            vertical-align: middle;
         }
         
-        .tooltip .tooltip-text {
-            visibility: hidden;
-            width: 200px;
+        .badge-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        footer {
             background-color: var(--dark);
             color: white;
+            padding: 3rem 0;
+            margin-top: 2rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: #f3f4f6;
+        }
+        
+        .footer-section p {
+            color: #9ca3af;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .footer-bottom {
             text-align: center;
-            padding: 8px 12px;
-            border-radius: 8px;
-            position: absolute;
-            z-index: 100;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
-            font-size: 0.8rem;
-            line-height: 1.4;
-            font-weight: normal;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #9ca3af;
+            font-size: 0.9rem;
         }
         
-        .tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-            transform: translateX(-50%) translateY(-5px);
+        .footer-links {
+            list-style: none;
         }
         
-        /* Styles pour mobile */
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .tooltips {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+        }
+        
+        .tooltip {
+            background-color: white;
+            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            transform: translateX(200%);
+            animation: slide-in 0.5s forwards, slide-out 0.5s 4s forwards;
+            max-width: 300px;
+        }
+        
+        @keyframes slide-in {
+            100% { transform: translateX(0); }
+        }
+        
+        @keyframes slide-out {
+            100% { transform: translateX(200%); }
+        }
+        
+        .tooltip-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        
+        .tooltip-text {
+            flex: 1;
+        }
+        
+        .tooltip-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .tooltip-body {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .animation-float {
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
         @media (max-width: 768px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            header h1 {
-                font-size: 2rem;
-            }
-            
-            header {
-                padding: 2rem 0 5rem 0;
-            }
-            
-            .form-container {
-                padding: 1.5rem;
-            }
-            
-            .button-group {
+            .main {
                 flex-direction: column;
             }
             
-            button {
+            .result-container {
+                position: static;
                 width: 100%;
             }
             
-            .flying-element {
-                display: none;
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .form-group {
+                width: 100%;
+            }
+            
+            .footer-content {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="flying-element element-1"><i class="fas fa-paper-plane"></i></div>
-        <div class="flying-element element-2"><i class="fas fa-map-marker-alt"></i></div>
-        <div class="flying-element element-3"><i class="fas fa-star"></i></div>
-        
-        <svg class="section-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,154.7C384,149,480,107,576,90.7C672,75,768,85,864,122.7C960,160,1056,224,1152,224C1248,224,1344,160,1392,128L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-        </svg>
-        
-        <div class="container header-content">
-            <i class="fas fa-plane header-icon"></i>
-            <h1>Prédiction de Satisfaction Voyageur</h1>
-            <p>Analysez l'expérience de vos passagers et anticipez leur satisfaction </p>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-plane"></i>
+                    <span>AirSatisfy Pro</span>
+                </a>
+            </nav>
         </div>
     </header>
-
-    <div class="container">
-        <div class="form-container">
-            <div class="progress-container">
-                <div class="progress-bar" id="form-progress"></div>
+    
+    <div class="hero">
+        <div class="container">
+            <h1>IA de Prédiction de Satisfaction Client</h1>
+            <p>Notre système d'intelligence artificielle analyse instantanément les données des passagers pour prédire leur niveau de satisfaction avec une précision exceptionnelle.</p>
+        </div>
+    </div>
+    
+    <div class="container">        
+        <div class="main">
+            <div class="form-container card">
+                <div class="card-header">
+                    <h2>Données du Passager</h2>
+                </div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <p><i class="fas fa-info-circle"></i> <strong>Astuce :</strong> Utilisez le bouton "Générer Données Aléatoires" pour tester rapidement le modèle sans remplir manuellement tous les champs.</p>
+                    </div>
+                
+                    <form id="prediction-form">
+                        <div class="form-section">
+                            <h3><i class="fas fa-user-circle"></i> Profil Passager</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="Gender">Genre</label>
+                                    <select id="Gender" name="Gender" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="Male">Homme</option>
+                                        <option value="Female">Femme</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Age">Âge</label>
+                                    <input type="number" id="Age" name="Age" min="0" max="120" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Customer Type">Type de Client</label>
+                                    <select id="Customer Type" name="Customer Type" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="Loyal Customer">Client Fidèle</option>
+                                        <option value="disloyal Customer">Client Occasionnel</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3><i class="fas fa-plane-departure"></i> Détails du Vol</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="Type of Travel">Type de Voyage</label>
+                                    <select id="Type of Travel" name="Type of Travel" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="Business travel">Voyage d'Affaires</option>
+                                        <option value="Personal Travel">Voyage Personnel</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Class">Classe</label>
+                                    <select id="Class" name="Class" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="Eco">Économique</option>
+                                        <option value="Eco Plus">Économique Plus</option>
+                                        <option value="Business">Affaires</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Flight Distance">Distance de Vol (km)</label>
+                                    <input type="number" id="Flight Distance" name="Flight Distance" min="0" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="Departure Delay in Minutes">Retard au Départ (minutes)</label>
+                                    <input type="number" id="Departure Delay in Minutes" name="Departure Delay in Minutes" min="0" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Arrival Delay in Minutes">Retard à l'Arrivée (minutes)</label>
+                                    <input type="number" id="Arrival Delay in Minutes" name="Arrival Delay in Minutes" min="0" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3><i class="fas fa-star"></i> Évaluation des Services</h3>
+                            <div class="info-box">
+                                <p><strong>Échelle d'évaluation :</strong> 0 (très insatisfait) à 5 (très satisfait)</p>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="Inflight wifi service">Wi-Fi à Bord</label>
+                                    <select id="Inflight wifi service" name="Inflight wifi service" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Departure/Arrival time convenient">Horaires Pratiques</label>
+                                    <select id="Departure/Arrival time convenient" name="Departure/Arrival time convenient" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="Ease of Online booking">Facilité de Réservation en Ligne</label>
+                                    <select id="Ease of Online booking" name="Ease of Online booking" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Gate location">Emplacement de la Porte</label>
+                                    <select id="Gate location" name="Gate location" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div> 
+                                <div class="form-group">
+                                    <label for="Food and drink">Nourriture et Boissons</label>
+                                    <select id="Food and drink" name="Food and drink" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="Online boarding">Embarquement en Ligne</label>
+                                    <select id="Online boarding" name="Online boarding" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Seat comfort">Confort du Siège</label>
+                                    <select id="Seat comfort" name="Seat comfort" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="Inflight entertainment">Divertissement à Bord</label>
+                                    <select id="Inflight entertainment" name="Inflight entertainment" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="On-board service">Service à Bord</label>
+                                    <select id="On-board service" name="On-board service" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="Leg room service">Espace pour les Jambes</label>
+                                    <select id="Leg room service" name="Leg room service" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Baggage handling">Gestion des Bagages</label>
+                                    <select id="Baggage handling" name="Baggage handling" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="Checkin service">Service d'Enregistrement</label>
+                                    <select id="Checkin service" name="Checkin service" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Inflight service">Service en Vol</label>
+                                    <select id="Inflight service" name="Inflight service" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="Cleanliness">Propreté</label>
+                                    <select id="Cleanliness" name="Cleanliness" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="0">0 - Très insatisfait</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Très satisfait</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-rocket"></i> Prédire la Satisfaction
+                            </button>
+                            <button type="button" id="random-btn" class="btn btn-random">
+                                <i class="fas fa-random"></i> Générer Données Aléatoires
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                <i class="fas fa-redo"></i> Réinitialiser
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
             
-            <form id="prediction-form">
-                <h2 class="section-title">
-                    <i class="fas fa-user-circle"></i> Profil Voyageur
-                    <span class="tooltip">
-                        <i class="fas fa-question-circle"></i>
-                        <span class="tooltip-text">Données démographiques et type de clientèle</span>
-                    </span>
-                </h2>
-                <div class="form-grid">
-                    <div class="form-group rating-card">
-                        <label for="Gender">Genre</label>
-                        <select id="Gender" name="Gender" required>
-                            <option value="">Sélectionner</option>
-                            <option value="Male">Homme</option>
-                            <option value="Female">Femme</option>
-                        </select>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="Age">Âge</label>
-                        <input type="number" id="Age" name="Age" min="0" max="120" required>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="Customer Type">Type de client</label>
-                        <select id="Customer Type" name="Customer Type" required>
-                            <option value="">Sélectionner</option>
-                            <option value="Loyal Customer">Client fidèle</option>
-                            <option value="disloyal Customer">Client occasionnel</option>
-                        </select>
-                    </div>
+            <div class="result-container card">
+                <div class="card-header">
+                    <h2>Résultat de la Prédiction</h2>
                 </div>
-
-                <h2 class="section-title">
-                    <i class="fas fa-plane-departure"></i> Détails du Voyage
-                    <span class="tooltip">
-                        <i class="fas fa-question-circle"></i>
-                        <span class="tooltip-text">Informations spécifiques au vol et à la réservation</span>
-                    </span>
-                </h2>
-                <div class="form-grid">
-                    <div class="form-group rating-card">
-                        <label for="Type of Travel">Type de voyage</label>
-                        <select id="Type of Travel" name="Type of Travel" required>
-                            <option value="">Sélectionner</option>
-                            <option value="Business travel">Voyage d'affaires</option>
-                            <option value="Personal Travel">Voyage personnel</option>
-                        </select>
+                <div class="card-body">
+                    <div class="result-box" id="result-placeholder">
+                        <i class="fas fa-chart-line result-icon animation-float"></i>
+                        <p class="result-text">Remplissez le formulaire pour obtenir une prédiction de satisfaction client</p>
                     </div>
-                    <div class="form-group rating-card">
-                        <label for="Class">Classe</label>
-                        <select id="Class" name="Class" required>
-                            <option value="">Sélectionner</option>
-                            <option value="Business">Business</option>
-                            <option value="Eco">Économique</option>
-                            <option value="Eco Plus">Économique Plus</option>
-                        </select>
+                    
+                    <div class="result-box hidden" id="result-loading">
+                        <div class="loader">
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <p class="result-text">Analyse en cours...</p>
                     </div>
-                    <div class="form-group rating-card">
-                        <label for="Flight Distance">Distance du vol (km)</label>
-                        <input type="number" id="Flight Distance" name="Flight Distance" min="0" required>
+                    
+                    <div class="result-box hidden" id="result-satisfied">
+                        <i class="fas fa-smile-beam result-icon satisfied pulse"></i>
+                        <p class="result-text">Client Satisfait</p>
+                        <p class="result-details">Notre modèle prédit que ce passager sera satisfait de son expérience de vol.</p>
                     </div>
-                    <div class="form-group rating-card">
-                        <label for="Departure Delay in Minutes">Retard au départ (minutes)</label>
-                        <input type="number" id="Departure Delay in Minutes" name="Departure Delay in Minutes" min="0" value="0" required>
+                    
+                    <div class="result-box hidden" id="result-neutral">
+                        <i class="fas fa-meh result-icon"></i>
+                        <p class="result-text">Satisfaction Neutre</p>
+                        <p class="result-details">Notre modèle prédit une expérience moyenne pour ce passager.</p>
                     </div>
-                    <div class="form-group rating-card">
-                        <label for="Arrival Delay in Minutes">Retard à l'arrivée (minutes)</label>
-                        <input type="number" id="Arrival Delay in Minutes" name="Arrival Delay in Minutes" min="0" value="0" required>
+                    
+                    <div class="result-box hidden" id="result-dissatisfied">
+                        <i class="fas fa-frown result-icon dissatisfied pulse"></i>
+                        <p class="result-text">Client Insatisfait</p>
+                        <p class="result-details">Notre modèle prédit que ce passager ne sera pas satisfait de son expérience de vol.</p>
                     </div>
-                </div>
-
-                <h2 class="section-title">
-                    <i class="fas fa-star"></i> Évaluation des Services
-                    <span class="tooltip">
-                        <i class="fas fa-question-circle"></i>
-                        <span class="tooltip-text">Notez votre expérience pour chaque service</span>
-                    </span>
-                </h2>
-                <div class="form-grid">
-                    <div class="form-group rating-card">
-                        <label for="Inflight wifi service">Wi-Fi à bord</label>
-                        <select id="Inflight wifi service" name="Inflight wifi service" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
+                    
+                    <div class="info-box info-box-result">
+                        <p><i class="fas fa-lightbulb"></i> <strong>Note :</strong> Cette prédiction est basée sur notre modèle d'IA entraîné sur des milliers d'évaluations de passagers.</p>
                     </div>
-                    <div class="form-group rating-card">
-                        <label for="Departure/Arrival time convenient">Horaires pratiques</label>
-                        <select id="Departure/Arrival time convenient" name="Departure/Arrival time convenient" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="Ease of Online booking">Facilité de réservation en ligne</label>
-                        <select id="Ease of Online booking" name="Ease of Online booking" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="Gate location">Emplacement de la porte</label>
-                        <select id="Gate location" name="Gate location" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="Food and drink">Nourriture et boissons</label>
-                        <select id="Food and drink" name="Food and drink" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="Online boarding">Embarquement en ligne</label>
-                        <select id="Online boarding" name="Online boarding" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="Seat comfort">Confort du siège</label>
-                        <select id="Seat comfort" name="Seat comfort" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="Inflight entertainment">Divertissement à bord</label>
-                        <select id="Inflight entertainment" name="Inflight entertainment" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="On-board service">Service à bord</label>
-                        <select id="On-board service" name="On-board service" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="Leg room service">Espace pour les jambes</label>
-                        <select id="Leg room service" name="Leg room service" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="Baggage handling">Gestion des bagages</label>
-                        <select id="Baggage handling" name="Baggage handling" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="Checkin service">Service d'enregistrement</label>
-                        <select id="Checkin service" name="Checkin service" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="Inflight service">Service en vol</label>
-                        <select id="Inflight service" name="Inflight service" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
-                    </div>
-                    <div class="form-group rating-card">
-                        <label for="Cleanliness">Propreté</label>
-                        <select id="Cleanliness" name="Cleanliness" required>
-                            <option value="1">1 - Très insatisfait</option>
-                            <option value="2">2 - Insatisfait</option>
-                            <option value="3">3 - Neutre</option>
-                            <option value="4">4 - Satisfait</option>
-                            <option value="5">5 - Très satisfait</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="button-group">
-                    <button type="button" id="random-btn" class="btn-secondary">
-                        <i class="fas fa-random"></i> Données aléatoires
-                    </button>
-                    <button type="reset" class="btn-secondary">
-                        <i class="fas fa-eraser"></i> Réinitialiser
-                    </button>
-                    <button type="submit" class="btn-primary">
-                        <i class="fas fa-chart-line"></i> Prédire
-                    </button>
-                </div>
-            </form>
-
-            <div class="loader">
-                <i class="fas fa-spinner"></i>
-            </div>
-
-            <div id="result-container">
-                <div class="result-icon">
-                    <i class="fas fa-smile"></i>
-                </div>
-                <h3 class="result-title">Résultat de la prédiction</h3>
-                <p class="result-message">Le client sera probablement satisfait de son expérience.</p>
-                <div class="button-group">
-                    <button type="button" class="btn-secondary" id="new-prediction">
-                        <i class="fas fa-redo"></i> Nouvelle prédiction
-                    </button>
                 </div>
             </div>
         </div>
     </div>
-
+    
     <footer>
         <div class="container">
-            <p>© 2025 Système de Prédiction de Satisfaction Client | Conçu avec <i class="fas fa-heart" style="color: #ef4444;"></i> pour une meilleure expérience voyageur</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AirSatisfy Pro</h3>
+                    <p>Notre solution d'IA révolutionnaire pour prédire et améliorer la satisfaction des passagers dans l'industrie aérienne.</p>
+                    <p><i class="fas fa-envelope"></i> contact@airsatisfypro.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens Utiles</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Documentation API</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Étude de Cas</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Confidentialité</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Technologies</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Machine Learning</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Analyse Prédictive</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Traitement du Langage</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Big Data</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 AirSatisfy Pro. Tous droits réservés.</p>
+            </div>
         </div>
     </footer>
-
+    
+    <div class="tooltips">
+        <div class="tooltip" id="tooltip-1">
+            <div class="tooltip-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="tooltip-text">
+                <div class="tooltip-title">Nouvelle Fonctionnalité</div>
+                <div class="tooltip-body">Essayez notre générateur de données aléatoires pour tester rapidement le modèle.</div>
+            </div>
+        </div>
+    </div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Gestion du formulaire
             const form = document.getElementById('prediction-form');
-            const loader = document.querySelector('.loader');
-            const resultContainer = document.getElementById('result-container');
             const randomBtn = document.getElementById('random-btn');
-            const newPredictionBtn = document.getElementById('new-prediction');
-            const progressBar = document.getElementById('form-progress');
-            const formInputs = form.querySelectorAll('input, select');
-        
-            // Animation d'entrée pour les cartes
-            document.querySelectorAll('.rating-card').forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        card.style.transition = 'all 0.5s ease';
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 100);
-                }, index * 50);
-            });
-        
-            // Suivi de la progression du formulaire
-            function updateProgress() {
-                const totalFields = formInputs.length;
-                let filledFields = 0;
-        
-                formInputs.forEach(input => {
-                    if (input.value.trim() !== '') {
-                        filledFields++;
-                    }
-                });
-        
-                const progress = (filledFields / totalFields) * 100;
-                progressBar.style.width = progress + '%';
+            
+            // Éléments de résultat
+            const resultPlaceholder = document.getElementById('result-placeholder');
+            const resultLoading = document.getElementById('result-loading');
+            const resultSatisfied = document.getElementById('result-satisfied');
+            const resultNeutral = document.getElementById('result-neutral');
+            const resultDissatisfied = document.getElementById('result-dissatisfied');
+            
+            // Fonction pour afficher un résultat
+            function showResult(resultType) {
+                // Masquer tous les résultats d'abord
+                resultPlaceholder.classList.add('hidden');
+                resultLoading.classList.add('hidden');
+                resultSatisfied.classList.add('hidden');
+                resultNeutral.classList.add('hidden');
+                resultDissatisfied.classList.add('hidden');
+                
+                // Afficher le résultat demandé
+                if (resultType === 'loading') {
+                    resultLoading.classList.remove('hidden');
+                } else if (resultType === 'satisfied') {
+                    resultSatisfied.classList.remove('hidden');
+                } else if (resultType === 'neutral') {
+                    resultNeutral.classList.remove('hidden');
+                } else if (resultType === 'dissatisfied') {
+                    resultDissatisfied.classList.remove('hidden');
+                } else {
+                    resultPlaceholder.classList.remove('hidden');
+                }
             }
-        
-            formInputs.forEach(input => {
-                input.addEventListener('change', updateProgress);
-                input.addEventListener('input', updateProgress);
-            });
-        
-            // Nouvelle prédiction
-            newPredictionBtn.addEventListener('click', function() {
-                resultContainer.style.display = 'none';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        
-            // Gestion de la soumission du formulaire
+            
+            // Simulation de la prédiction
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-        
-                const submitBtn = form.querySelector('button[type="submit"]');
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyse en cours...';
-                submitBtn.disabled = true;
-        
-                loader.style.display = 'block';
-                resultContainer.style.display = 'none';
-        
-                const formData = new FormData(form);
-        
-                fetch('/predict', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    loader.style.display = 'none';
-                    submitBtn.innerHTML = '<i class="fas fa-chart-line"></i> Prédire';
-                    submitBtn.disabled = false;
-        
-                    resultContainer.style.opacity = '0';
-                    resultContainer.style.transform = 'translateY(20px)';
-                    resultContainer.style.display = 'block';
-        
-                    const resultIcon = resultContainer.querySelector('.result-icon i');
-                    const resultTitle = resultContainer.querySelector('.result-title');
-                    const resultMessage = resultContainer.querySelector('.result-message');
-        
-                    setTimeout(() => {
-                        resultContainer.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                        resultContainer.style.opacity = '1';
-                        resultContainer.style.transform = 'translateY(0)';
-        
-                        if (data.prediction === 'satisfied') {
-                            resultContainer.className = 'result-positive';
-                            resultIcon.className = 'fas fa-smile';
-                            resultTitle.textContent = 'Prédiction Positive';
-                            resultMessage.innerHTML = `Le client sera <strong>probablement satisfait</strong> de son expérience.`;
-                        } else {
-                            resultContainer.className = 'result-negative';
-                            resultIcon.className = 'fas fa-frown';
-                            resultTitle.textContent = 'Prédiction Négative';
-                            resultMessage.innerHTML = `Le client risque d'être <strong>insatisfait</strong> de son expérience.`;
-                        }
-        
-                        resultContainer.scrollIntoView({ behavior: 'smooth' });
-                    }, 300);
-                })
-                .catch(error => {
-                    loader.style.display = 'none';
-                    submitBtn.innerHTML = '<i class="fas fa-chart-line"></i> Prédire';
-                    submitBtn.disabled = false;
-                    console.error('Erreur lors de la prédiction :', error);
-                    alert("Erreur lors de l'envoi des données.");
-                });
+                
+                // Afficher le loader
+                showResult('loading');
+                
+                // Simuler un délai de traitement
+                setTimeout(function() {
+                    // Générer un résultat aléatoire pour la démo
+                    const randomResult = Math.random();
+                    
+                    if (randomResult > 0.7) {
+                        showResult('satisfied');
+                    } else if (randomResult > 0.3) {
+                        showResult('neutral');
+                    } else {
+                        showResult('dissatisfied');
+                    }
+                    
+                    // Envoyer les données à l'API dans une vraie application
+                    // const formData = new FormData(form);
+                    // fetch('/api/predict', {
+                    //     method: 'POST',
+                    //     body: JSON.stringify(Object.fromEntries(formData)),
+                    //     headers: {
+                    //         'Content-Type': 'application/json'
+                    //     }
+                    // })
+                    // .then(response => response.json())
+                    // .then(data => {
+                    //     if (data.prediction === 'satisfied') {
+                    //         showResult('satisfied');
+                    //     } else {
+                    //         showResult('dissatisfied');
+                    //     }
+                    // });
+                    
+                }, 1500);
             });
-        
-            // Remplissage de données aléatoires
+            
+            // Génération de données aléatoires
             randomBtn.addEventListener('click', function() {
-                const ratings = ['1', '2', '3', '4', '5'];
-                const genders = ['Male', 'Female'];
-                const customerTypes = ['Loyal Customer', 'disloyal Customer'];
-                const travelTypes = ['Business travel', 'Personal Travel'];
-                const classes = ['Business', 'Eco', 'Eco Plus'];
-        
-                randomBtn.innerHTML = '<i class="fas fa-magic"></i> Génération...';
-        
-                setTimeout(() => {
-                    document.getElementById('Gender').value = genders[Math.floor(Math.random() * genders.length)];
-                    document.getElementById('Age').value = Math.floor(Math.random() * 65) + 18;
-                    document.getElementById('Customer Type').value = customerTypes[Math.floor(Math.random() * customerTypes.length)];
-                    updateProgress();
-                }, 300);
-        
-                setTimeout(() => {
-                    document.getElementById('Type of Travel').value = travelTypes[Math.floor(Math.random() * travelTypes.length)];
-                    document.getElementById('Class').value = classes[Math.floor(Math.random() * classes.length)];
-                    document.getElementById('Flight Distance').value = Math.floor(Math.random() * 5000) + 100;
-                    updateProgress();
-                }, 600);
-        
-                setTimeout(() => {
-                    document.getElementById('Departure Delay in Minutes').value = Math.floor(Math.random() * 120);
-                    document.getElementById('Arrival Delay in Minutes').value = Math.floor(Math.random() * 120);
-                    updateProgress();
-                }, 900);
-        
-                const ratingInputs = [
-                    'Inflight wifi service',
-                    'Departure/Arrival time convenient',
-                    'Ease of Online booking',
-                    'Gate location',
-                    'Food and drink',
-                    'Online boarding',
-                    'Seat comfort',
-                    'Inflight entertainment',
-                    'On-board service',
-                    'Leg room service',
-                    'Baggage handling',
-                    'Checkin service',
-                    'Inflight service',
-                    'Cleanliness'
+                // Générer des valeurs aléatoires pour chaque champ
+                document.getElementById('Gender').value = Math.random() > 0.5 ? 'Male' : 'Female';
+                document.getElementById('Age').value = Math.floor(Math.random() * 60) + 18;
+                document.getElementById('Customer Type').value = Math.random() > 0.3 ? 'Loyal Customer' : 'disloyal Customer';
+                document.getElementById('Type of Travel').value = Math.random() > 0.5 ? 'Business travel' : 'Personal Travel';
+                
+                const classes = ['Eco', 'Eco Plus', 'Business'];
+                document.getElementById('Class').value = classes[Math.floor(Math.random() * classes.length)];
+                
+                document.getElementById('Flight Distance').value = Math.floor(Math.random() * 5000) + 100;
+                document.getElementById('Departure Delay in Minutes').value = Math.floor(Math.random() * 120);
+                document.getElementById('Arrival Delay in Minutes').value = Math.floor(Math.random() * 120);
+                
+                // Générer des évaluations aléatoires pour les services
+                const serviceFields = [
+                    'Inflight wifi service', 'Departure/Arrival time convenient', 'Ease of Online booking',
+                    'Gate location', 'Food and drink', 'Online boarding', 'Seat comfort',
+                    'Inflight entertainment', 'On-board service', 'Leg room service',
+                    'Baggage handling', 'Checkin service', 'Inflight service', 'Cleanliness'
                 ];
-        
-                ratingInputs.forEach((input, index) => {
-                    setTimeout(() => {
-                        document.getElementById(input).value = ratings[Math.floor(Math.random() * ratings.length)];
-                        updateProgress();
-        
-                        if (index === ratingInputs.length - 1) {
-                            setTimeout(() => {
-                                randomBtn.innerHTML = '<i class="fas fa-random"></i> Données aléatoires';
-                            }, 300);
-                        }
-                    }, 1000 + index * 50);
+                
+                serviceFields.forEach(field => {
+                    const select = document.getElementById(field);
+                    select.value = Math.floor(Math.random() * 6); // 0-5
                 });
+                
+                // Afficher une notification
+                const tooltip = document.getElementById('tooltip-1');
+                tooltip.style.display = 'flex';
+                setTimeout(() => {
+                    tooltip.style.display = 'none';
+                }, 5000);
             });
-        
-            updateProgress();
         });
-        </script>
-        
+    </script>
 </body>
 </html>

@@ -13,9 +13,9 @@ ENCODERS_PATH = "C:/Users/remila/Desktop/projet python/projet_avion/source/scrip
 try:
     model = joblib.load(MODEL_PATH)
     encoders = joblib.load(ENCODERS_PATH)
-    print("✅ Modèle et encodeurs chargés avec succès")
+    print(" Modèle et encodeurs chargés avec succès")
 except Exception as e:
-    print(f"❌ Erreur de chargement : {str(e)}")
+    print(f" Erreur de chargement : {str(e)}")
     raise
 
 # Colonnes d'entrée
@@ -38,7 +38,7 @@ def home():
 def predict():
     try:
         form_data = request.form.to_dict()
-        print("📥 Données reçues:", form_data)
+        print(" Données reçues:", form_data)
 
         # Construction du DataFrame
         data = {}
@@ -53,7 +53,7 @@ def predict():
                 data[col] = [val if val != '' else "Unknown"]
 
         df = pd.DataFrame(data)
-        print("\n🔍 Données AVANT encodage :")
+        print("\n Données AVANT encodage :")
         print(df)
 
         # Encodage avec fallback intelligent
@@ -63,19 +63,19 @@ def predict():
                 try:
                     df[col] = encoder.transform(df[col])
                 except ValueError:
-                    print(f"⚠️ Valeur inconnue pour {col} : '{original_val}'")
+                    print(f" Valeur inconnue pour {col} : '{original_val}'")
                     fallback_val = encoder.classes_[0]
                     df[col] = encoder.transform([fallback_val])
-                    print(f"➡️ Remplacé par valeur par défaut : '{fallback_val}'")
+                    print(f" Remplacé par valeur par défaut : '{fallback_val}'")
 
-        print("\n✅ Données APRÈS encodage :")
+        print("\n Données APRÈS encodage :")
         print(df)
 
         # Prédiction
         prediction = model.predict(df)[0]
         result = "satisfied" if prediction == 1 else "neutral or dissatisfied"
 
-        print(f"\n🔮 Prédiction : {result}")
+        print(f"\n Prédiction : {result}")
 
         return jsonify({
             'success': True,
@@ -84,7 +84,7 @@ def predict():
         })
 
     except Exception as e:
-        print(f"❌ Erreur de prédiction : {str(e)}")
+        print(f" Erreur de prédiction : {str(e)}")
         return jsonify({
             'success': False,
             'error': str(e)

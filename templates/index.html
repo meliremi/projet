@@ -7,22 +7,24 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #00ABE4;
-            --primary-light: #96C2DB;;
-            --primary-dark: #303a65;      /* Bleu nuit pour header/footer et titres */
-            --secondary: #10b981;         /* Vert pour succès ou éléments secondaires */
-            --dark: #333333;              /* Gris foncé pour le texte principal */
-            --light: #E5EDF1;  
-            --danger: #E7473C;            /* Rouge vif pour alertes et erreurs */
-    --warning: #f59e0b;           /* Orange pour avertissements */
-    --gray: #6b7280;              /* Gris pour éléments neutres */
-    --card-bg: #ffffff;           /* Fond des cartes/blocs */
-    --body-bg: #F9FAFB;           /* Fond général du site */
-    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --border-radius: 0.5rem;
-}
-        
+            --primary: #3B82F6;           
+            --primary-light: #93C5FD;    
+            --primary-dark: #1E3A8A;      
+            --secondary: #10B981;         
+            --dark: #1F2937;              
+            --light: #F0F9FF;             
+            --danger: #EF4444;            
+            --warning: #F59E0B;           
+            --gray: #6B7280;              
+            --card-bg: #FFFFFF;           
+            --body-bg: #F8FAFC;           
+            --accent: #0EA5E9;            
+            --cloud-white: #FAFCFF;       
+            --gold: #F59E0B;             
+            --shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.1), 0 8px 10px -6px rgba(30, 58, 138, 0.08);
+            --shadow-sm: 0 4px 6px -1px rgba(30, 58, 138, 0.07);
+            --border-radius: 0.5rem;
+        }
         
         * {
             margin: 0;
@@ -44,7 +46,7 @@
         }
         
         header {
-            background: var(--primary-dark);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
             color: white;
             padding: 1rem 0;
             position: sticky;
@@ -66,21 +68,20 @@
             font-weight: 700;
             color: white;
             text-decoration: none;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
         
         .logo i {
             margin-right: 10px;
             font-size: 1.8rem;
+            color: var(--light);
         }
         
         .hero {
             position: relative;
             text-align: center;
-            padding: 4rem 0;
-            background-image: linear-gradient(
-                to right, 
-                #96C2DB, #E5EDF1
-            ), url('/api/placeholder/1400/500');
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #1A365D, #2C5282);
             background-size: cover;
             background-position: center;
             color: white;
@@ -88,30 +89,85 @@
             border-radius: 0 0 var(--border-radius) var(--border-radius);
             overflow: hidden;
         }
+        
         .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('https://via.placeholder.com/1400x500') center/cover;
-    opacity: 0.3;
-    z-index: 1;
-}
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(45deg, rgba(20, 30, 80, 0.7), rgba(20, 30, 80, 0.3)),
+                url('https://via.placeholder.com/1400x500');
+            background-size: cover;
+            background-position: center center;
+            opacity: 0.8;
+            z-index: 1;
+            animation: slowly-pan 50s infinite alternate ease-in-out;
+        }
+        
+        @keyframes slowly-pan {
+            0% { background-position: center left; }
+            100% { background-position: center right; }
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='smallGrid' width='20' height='20' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 20 0 L 0 0 0 20' fill='none' stroke='rgba(255, 255, 255, 0.05)' stroke-width='0.5'/%3E%3C/pattern%3E%3Cpattern id='grid' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Crect width='100' height='100' fill='url(%23smallGrid)'/%3E%3Cpath d='M 100 0 L 0 0 0 100' fill='none' stroke='rgba(255, 255, 255, 0.1)' stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grid)' /%3E%3C/svg%3E");
+            z-index: 1;
+            opacity: 0.7;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 0 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            border-radius: 1rem;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem 3rem;
+            max-width: 90%;
+            margin: 0 auto;
+        }
         
         .hero h1 {
             font-size: 3rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             position: relative;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-weight: 800;
+            background: linear-gradient(120deg, #FFFFFF, #E2E8F0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero h1::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #F59E0B, #FBBF24);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
         }
         
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             max-width: 800px;
             margin: 0 auto;
             position: relative;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         
         .main {
@@ -127,11 +183,12 @@
             box-shadow: var(--shadow);
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(148, 163, 184, 0.1);
         }
         
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 25px 50px -12px rgba(30, 58, 138, 0.15);
         }
         
         .form-container {
@@ -150,7 +207,8 @@
         
         .card-header {
             padding: 1.5rem;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            background: linear-gradient(to right, var(--light), var(--cloud-white));
         }
         
         .card-body {
@@ -167,7 +225,7 @@
         .form-section {
             margin-bottom: 2rem;
             padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
         }
         
         .form-section:last-child {
@@ -178,7 +236,7 @@
         
         .form-section h3 {
             margin-bottom: 1.5rem;
-            color: var(--dark);
+            color: var(--primary);
             display: flex;
             align-items: center;
             font-size: 1.25rem;
@@ -187,7 +245,7 @@
         
         .form-section h3 i {
             margin-right: 10px;
-            color: var(--primary);
+            color: var(--accent);
             font-size: 1.1em;
         }
         
@@ -218,18 +276,18 @@
         input, select {
             width: 100%;
             padding: 0.75rem 1rem;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #CBD5E1;
             border-radius: 0.375rem;
             font-size: 1rem;
             transition: all 0.2s;
-            background-color: #fff;
+            background-color: var(--cloud-white);
             color: var(--dark);
         }
         
         input:focus, select:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(75, 111, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
         
         .rating-group {
@@ -240,7 +298,7 @@
         .rating-options {
             display: flex;
             justify-content: space-between;
-            background-color: #f9fafb;
+            background-color: var(--light);
             border-radius: 0.375rem;
             padding: 0.25rem;
             margin-top: 0.5rem;
@@ -258,7 +316,7 @@
         }
         
         .rating-option:hover {
-            background-color: rgba(75, 111, 255, 0.1);
+            background-color: rgba(59, 130, 246, 0.1);
         }
         
         .rating-option.selected {
@@ -284,7 +342,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-sm);
         }
         
         .btn i {
@@ -292,14 +350,14 @@
         }
         
         .btn-primary {
-            background-color: var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--accent));
             color: white;
         }
         
         .btn-primary:hover {
-            background-color: var(--primary-dark);
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
             transform: translateY(-1px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 6px 12px -2px rgba(59, 130, 246, 0.25);
         }
         
         .btn-primary:active {
@@ -307,14 +365,15 @@
         }
         
         .btn-secondary {
-            background-color: #f3f4f6;
-            color: var(--dark);
+            background-color: var(--light);
+            color: var(--primary-dark);
+            border: 1px solid rgba(148, 163, 184, 0.2);
         }
         
         .btn-secondary:hover {
-            background-color: #e5e7eb;
+            background-color: var(--cloud-white);
             transform: translateY(-1px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
         }
         
         .btn-secondary:active {
@@ -322,8 +381,9 @@
         }
         
         .btn-danger {
-            background-color: #f3f4f6;
+            background-color: #FEF2F2;
             color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.1);
         }
         
         .btn-danger:hover {
@@ -331,29 +391,29 @@
         }
         
         .btn-success {
-            background-color: var(--secondary);
+            background: linear-gradient(to right, var(--secondary), #06B6D4);
             color: white;
         }
         
         .btn-success:hover {
-            background-color: #0ea16b;
+            background: linear-gradient(to right, #059669, var(--secondary));
             transform: translateY(-1px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 6px 12px -2px rgba(16, 185, 129, 0.25);
         }
         
         .btn-random {
-            background-color: #b9b2c9;
+            background: linear-gradient(to right, #8B5CF6, #6366F1);
             color: white;
         }
         
         .btn-random:hover {
-            background-color: #7c3aed;
+            background: linear-gradient(to right, #7C3AED, #4F46E5);
             transform: translateY(-1px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 6px 12px -2px rgba(124, 58, 237, 0.25);
         }
         
         .result-box {
-            background-color: #f9fafb;
+            background: linear-gradient(145deg, var(--cloud-white), var(--light));
             border-radius: 0.375rem;
             padding: 2rem;
             text-align: center;
@@ -364,6 +424,7 @@
             align-items: center;
             gap: 1rem;
             transition: all 0.3s ease;
+            border: 1px solid rgba(148, 163, 184, 0.1);
         }
         
         .result-box.hidden {
@@ -389,6 +450,7 @@
         .result-text {
             font-size: 1.25rem;
             font-weight: 600;
+            color: var(--primary-dark);
         }
         
         .result-details {
@@ -443,7 +505,7 @@
         }
         
         .info-box {
-            background-color: rgba(75, 111, 255, 0.05);
+            background-color: rgba(59, 130, 246, 0.05);
             border-left: 4px solid var(--primary);
             padding: 1rem 1.25rem;
             margin-bottom: 1.5rem;
@@ -474,12 +536,12 @@
         }
         
         .badge-primary {
-            background-color: var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--accent));
             color: white;
         }
         
         footer {
-            background-color: var(--dark);
+            background: linear-gradient(to right, var(--primary-dark), #1E40AF);
             color: white;
             padding: 3rem 0;
             margin-top: 2rem;
@@ -500,11 +562,11 @@
         .footer-section h3 {
             margin-bottom: 1rem;
             font-size: 1.2rem;
-            color: #f3f4f6;
+            color: var(--light);
         }
         
         .footer-section p {
-            color: #9ca3af;
+            color: #BAE6FD;
             margin-bottom: 1rem;
             font-size: 0.9rem;
         }
@@ -514,7 +576,7 @@
             margin-top: 2rem;
             padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #9ca3af;
+            color: #BAE6FD;
             font-size: 0.9rem;
         }
         
@@ -527,7 +589,7 @@
         }
         
         .footer-links a {
-            color: #9ca3af;
+            color: #BAE6FD;
             text-decoration: none;
             transition: color 0.2s;
             font-size: 0.9rem;
@@ -555,6 +617,7 @@
             transform: translateX(200%);
             animation: slide-in 0.5s forwards, slide-out 0.5s 4s forwards;
             max-width: 300px;
+            border: 1px solid rgba(148, 163, 184, 0.1);
         }
         
         @keyframes slide-in {
@@ -578,6 +641,7 @@
         .tooltip-title {
             font-weight: 600;
             margin-bottom: 0.25rem;
+            color: var(--primary-dark);
         }
         
         .tooltip-body {
@@ -630,7 +694,7 @@
             <nav class="navbar">
                 <a href="#" class="logo">
                     <i class="fas fa-plane"></i>
-                    <span>AirSatisfy Pro</span>
+                    <span>AirSatisfy</span>
                 </a>
             </nav>
         </div>
@@ -638,7 +702,7 @@
     
     <div class="hero">
         <div class="container">
-            <h1>IA de Prédiction de Satisfaction Client</h1>
+            <h1>Site de Prédiction de Satisfaction Client</h1>
             <p>Notre système d'intelligence artificielle analyse instantanément les données des passagers pour prédire leur niveau de satisfaction avec une précision exceptionnelle.</p>
         </div>
     </div>
@@ -978,9 +1042,9 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>AirSatisfy Pro</h3>
+                    <h3>AirSatisfy </h3>
                     <p>Notre solution d'IA révolutionnaire pour prédire et améliorer la satisfaction des passagers dans l'industrie aérienne.</p>
-                    <p><i class="fas fa-envelope"></i> contact@airsatisfypro.com</p>
+                    <p><i class="fas fa-envelope"></i> contact@airsatisfy.com</p>
                 </div>
                 <div class="footer-section">
                     <h3>Liens Utiles</h3>
@@ -1002,7 +1066,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 AirSatisfy Pro. Tous droits réservés.</p>
+                <p>&copy; 2025 AirSatisfy. Tous droits réservés. fait par amour  ❤ par Mélissa Remila</p>
             </div>
         </div>
     </footer>
